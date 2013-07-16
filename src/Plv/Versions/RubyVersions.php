@@ -29,7 +29,7 @@ class RubyVersions implements VersionsInterface
 			$filtered_replace_items = array();
 			foreach ($items as $item) {
 				if (preg_match('/.*([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}\-p[0-9]{1,}).*$/', $item, $m)) {
-					$filtered_replace_items[] = $m[1];
+					$filtered_replace_items[] = strtr($m[1], array('-' => ''));
 				}
 			}
 
@@ -42,7 +42,7 @@ class RubyVersions implements VersionsInterface
 		$version = null;
 
 		$version_str = exec('/usr/bin/env ruby --version 2>&1');
-		if (preg_match('/^.*([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(p[0-9]{1,})?).*$/', $version_str, $m)) {
+		if (preg_match('/^ruby ([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(p[0-9]{1,})?).*$/', $version_str, $m)) {
 			$version = $m[1];
 		}
 
