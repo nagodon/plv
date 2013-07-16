@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+
+<?php
+
+define('ROOT_PATH', __DIR__ . '/../');
+define('VERSIONS_CLASS_NAME_FORMAT', 'Plv\Versions\%sVersions');
+
+require ROOT_PATH . 'vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputArgument;
+use Plv\Command\CheckCommand;
+use Plv\Command\LanguageCommand;
+
+$application = new Application($name = 'plv', $version = '0.1.0');
+$application->setDefinition(new InputDefinition(array(
+	new InputArgument('command', InputArgument::REQUIRED, 'The command to execute')
+)));
+$application->addCommands(array(
+	new CheckCommand(),
+	new LanguageCommand()
+));
+$application->run();

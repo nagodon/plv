@@ -1,0 +1,21 @@
+{
+    "name": "plv/plv",
+    "description": "Programming language version check tool",
+    "keywords": ["cli", "programming language", "version"],
+    "authors": [
+       {
+           "name": "Isamu Nagoya",
+           "email": "nagodon@gmail.com"
+       }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "fabpot/goutte": "v1.0.1",
+        "symfony/console": "v2.3.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "Plv": "src/"
+        }
+    }
+}
