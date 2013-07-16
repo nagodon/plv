@@ -5,7 +5,14 @@
 define('ROOT_PATH', __DIR__ . '/../');
 define('VERSIONS_CLASS_NAME_FORMAT', 'Plv\Versions\%sVersions');
 
-require ROOT_PATH . 'vendor/autoload.php';
+$autoload_file = ROOT_PATH . 'vendor/autoload.php';
+if (file_exists($autoload_file)) {
+	// git clone or github download or composer create-project
+	require $autoload_file;
+} else {
+	// composer install
+	require ROOT_PATH . '../../autoload.php';
+}
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputDefinition;

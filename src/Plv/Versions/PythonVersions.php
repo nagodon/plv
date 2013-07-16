@@ -40,7 +40,7 @@ class PythonVersions implements VersionsInterface
 	{
 		$version = null;
 
-		$version_str = exec('/usr/bin/env python --version 2>&1');
+		$version_str = exec('/usr/bin/env python -V 2>&1');
 		if (preg_match('/^.*([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}).*$/', $version_str, $m)) {
 			$version = $m[1];
 		}
