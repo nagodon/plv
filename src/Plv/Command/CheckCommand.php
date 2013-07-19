@@ -49,9 +49,9 @@ class CheckCommand extends Command
 			$versions_collection->append(new $class);
 		}
 
-		$pversions = new Plv($versions_collection);
+		$plv = new Plv($versions_collection);
 		try {
-			$pversions->execute();
+			$plv->execute();
 		} catch (Guzzle\Http\Exception\CurlException $ce) {
 			$output->writeln("<error>Network error</error>");
 		} catch (Exception $e) {
