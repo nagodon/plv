@@ -8,7 +8,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
 
 class CheckCommand extends Command
 {
@@ -37,10 +36,9 @@ class CheckCommand extends Command
 				exit;
 			}
 		} else {
-			$finder  = new Finder();
-			$iterator = $finder->files()->name('*Versions.php')->in(ROOT_PATH . 'src/Plv/Versions');
+			$iterator = Plv::findByLanguageFile();
 			foreach ($iterator as $file) {
-				$classes[] = sprintf(VERSIONS_CLASS_NAME_FORMAT, substr(basename($file->getRealpath()), 0, -12));
+				$classes[] = sprintf(VERSIONS_CLASS_NAME_FORMAT, ucfirst(Plv::toLanguageName($file)));
 			}
 		}
 

@@ -7,6 +7,7 @@ use Plv\Versions\VersionsInterface;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Finder\Finder;
 
 class Plv
 {
@@ -50,5 +51,20 @@ class Plv
 			$output->writeln(sprintf('installed version : <comment>%s</comment>', $installed_version));
 			$output->writeln('');
 		}
+	}
+
+	public static function findByLanguageFile()
+	{
+		$finder = new Finder();
+		return $finder
+			->files()
+			->name('*Versions.php')
+			->in(ROOT_PATH . 'src/Plv/Versions')
+			->sortByName();
+	}
+
+	public static function toLanguageName(\SplFileInfo $file)
+	{
+		return strtolower(substr(basename($file->getRealpath()), 0, -12));
 	}
 }
