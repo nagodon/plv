@@ -15,6 +15,10 @@ Install composer in your directory:
 curl -s http://getcomposer.org/installer | php
 ```
 
+[Download][1] latest version
+
+or
+
 Create project via composer:
 
 ```
@@ -27,15 +31,15 @@ Usage
 Check programming language version
 
 ```
-/path/to/insta/bin/plv check [php]
+/path/to/install/bin/plv check [perl|php|python|ruby]
 ```
 
 List of programming language that supports
 
 ```
-/path/to/insta/bin/plv language
+/path/to/install/bin/plv language
 ```
 
-
+[1]: https://github.com/isam/plv/releases
 
 
