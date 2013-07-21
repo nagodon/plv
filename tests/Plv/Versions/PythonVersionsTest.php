@@ -3,9 +3,21 @@
 namespace Plv\Versions;
 
 use Plv\Versions\PythonVersions;
+use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
 
 class PythonVersionsTest extends \PHPUnit_Framework_TestCase
 {
+	private $html;
+	private $url = 'http://www.python.org/download/';
+
+	protected function setup()
+	{
+		$client = new Client();
+		$client->request('GET', $this->url);
+		$this->html = $client->getResponse()->getContent();
+	}
+
 	public function testGetName()
 	{
 		$pv = new PythonVersions();
@@ -15,23 +27,40 @@ class PythonVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$pv = new PythonVersions();
-		$this->assertSame('http://www.python.org/download/', $pv->getUrl());
+		$this->assertSame($this->url, $pv->getUrl());
 	}
 
 	public function testGetFilterValue()
 	{
+		$crawler = new Crawler();
 		$pv = new PythonVersions();
+
+		$crawler->addHtmlContent($this->html);
+		$items = $crawler->filter($pv->getFilterValue());
+
 		$this->assertSame('div#download-python > p > a', $pv->getFilterValue());
+		$this->assertGreaterThanOrEqual(2, count($items));
 	}
 
 	public function testGetCallback()
 	{
+		$crawler = new Crawler();
 		$pv = new PythonVersions();
+
 		$callback = $pv->getCallback();
-		$version_str = array('Python 2.7.4', 'Python 3.3.1');
+		$crawler->addHtmlContent($this->html);
+
+		$items = $crawler->filter($pv->getFilterValue())->each(function ($crawler, $i) {
+			return $crawler->text();
+		});
+
+		$version_str = $callback($items);
 
 		$this->assertTrue(is_callable($callback));
-		$this->assertSame(array('2.7.4', '3.3.1'), $callback($version_str));
+		$this->assertGreaterThanOrEqual(2, count($version_str));
+		foreach ($version_str as $str) {
+			$this->assertRegExp('/^[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/', $str);
+		}
 	}
 
 	public function testGetInstalledVersion()

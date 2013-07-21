@@ -3,9 +3,21 @@
 namespace Plv\Versions;
 
 use Plv\Versions\RubyVersions;
+use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
 
 class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 {
+	private $html;
+	private $url = 'http://www.ruby-lang.org/ja/downloads/';
+
+	protected function setup()
+	{
+		$client = new Client();
+		$client->request('GET', $this->url);
+		$this->html = $client->getResponse()->getContent();
+	}
+
 	public function testGetName()
 	{
 		$rv = new RubyVersions();
@@ -15,27 +27,40 @@ class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$rv = new RubyVersions();
-		$this->assertSame('http://www.ruby-lang.org/ja/downloads/', $rv->getUrl());
+		$this->assertSame($this->url, $rv->getUrl());
 	}
 
 	public function testGetFilterValue()
 	{
+		$crawler = new Crawler();
 		$rv = new RubyVersions();
+
+		$crawler->addHtmlContent($this->html);
+		$items = $crawler->filter($rv->getFilterValue());
+
 		$this->assertSame('div#content > ul > li', $rv->getFilterValue());
+		$this->assertGreaterThanOrEqual(3, count($items));
 	}
 
 	public function testGetCallback()
 	{
+		$crawler = new Crawler();
 		$rv = new RubyVersions();
+
 		$callback = $rv->getCallback();
-		$version_str = array(
-			'最新の安定版であるruby 2.0.0-p247[]',
-			'前世代の安定版であるruby 1.9.3-p448[]',
-			'前々世代の安定版であるruby 1.8.7-p374[]'
-		);
+		$crawler->addHtmlContent($this->html);
+
+		$items = $crawler->filter($rv->getFilterValue())->each(function ($crawler, $i) {
+			return $crawler->text();
+		});
+
+		$version_str = $callback($items);
 
 		$this->assertTrue(is_callable($callback));
-		$this->assertSame(array('2.0.0p247', '1.9.3p448', '1.8.7p374'), $callback($version_str));
+		$this->assertGreaterThanOrEqual(3, count($version_str));
+		foreach ($version_str as $str) {
+			$this->assertRegExp('/^[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/', $str);
+		}
 	}
 
 	public function testGetInstalledVersion()

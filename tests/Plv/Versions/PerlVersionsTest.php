@@ -3,9 +3,21 @@
 namespace Plv\Versions;
 
 use Plv\Versions\PerlVersions;
+use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
 
 class PerlVersionsTest extends \PHPUnit_Framework_TestCase
 {
+	private $html;
+	private $url = 'http://perl.org/';
+
+	protected function setup()
+	{
+		$client = new Client();
+		$client->request('GET', $this->url);
+		$this->html = $client->getResponse()->getContent();
+	}
+
 	public function testGetName()
 	{
 		$pv = new PerlVersions();
@@ -15,23 +27,38 @@ class PerlVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$pv = new PerlVersions();
-		$this->assertSame('http://perl.org/', $pv->getUrl());
+		$this->assertSame($this->url, $pv->getUrl());
 	}
 
 	public function testGetFilterValue()
 	{
+		$crawler = new Crawler();
 		$pv = new PerlVersions();
+
+		$crawler->addHtmlContent($this->html);
+		$items = $crawler->filter($pv->getFilterValue());
+
 		$this->assertSame('div#short_lists > div.quick_links > div.list > p > a', $pv->getFilterValue());
+		$this->assertGreaterThan(1, count($items));
 	}
 
 	public function testGetCallback()
 	{
+		$crawler = new Crawler();
 		$pv = new PerlVersions();
+
 		$callback = $pv->getCallback();
-		$version_str = array('5.18.0 - download now');
+		$crawler->addHtmlContent($this->html);
+
+		$items = $crawler->filter($pv->getFilterValue())->each(function ($crawler, $i) {
+			return $crawler->text();
+		});
+
+		$version_str = $callback($items);
 
 		$this->assertTrue(is_callable($callback));
-		$this->assertSame(array('5.18.0'), $callback($version_str));
+		$this->assertEquals(1, count($version_str));
+		$this->assertRegExp('/^[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}$/', $version_str[0]);
 	}
 
 	public function testGetInstalledVersion()
