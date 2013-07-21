@@ -50,11 +50,13 @@ class PhpVersionsTest extends \PHPUnit_Framework_TestCase
 		$callback = $pv->getCallback();
 		$crawler->addHtmlContent($this->html);
 
-		$version_str = $crawler->filter($pv->getFilterValue())->each(function ($crawler, $i) {
+		$items = $crawler->filter($pv->getFilterValue())->each(function ($crawler, $i) {
 			return $crawler->text();
 		});
 
-		$this->assertSame(null, $callback);
+		$version_str = $callback($items);
+
+		$this->assertTrue(is_callable($callback));
 		$this->assertGreaterThanOrEqual(3, count($version_str));
 		foreach ($version_str as $str) {
 			$this->assertRegExp('/^[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/', $str);

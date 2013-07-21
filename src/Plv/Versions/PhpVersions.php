@@ -25,7 +25,15 @@ class PhpVersions implements VersionsInterface
 
 	public function getCallback()
 	{
-		return null;
+		return function ($items) {
+			foreach ($items as $item) {
+				if (preg_match('/^([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(RC[0-9]{1,})?)/', $item, $m)) {
+					$filtered_replace_items[] = $m[1];
+				}
+			}
+
+			return $filtered_replace_items;
+		};
 	}
 
 	public function getInstalledVersion()
