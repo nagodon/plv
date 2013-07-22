@@ -4,13 +4,13 @@ namespace Plv\Versions;
 
 use Plv\Versions\VersionsInterface;
 
-class PythonVersions implements VersionsInterface
+class NodejsVersions implements VersionsInterface
 {
-	private $url = 'http://www.python.org/download/';
+	private $url = 'http://nodejs.org/';
 
 	public function getName()
 	{
-		return 'Python';
+		return 'node.js';
 	}
 
 	public function getUrl()
@@ -20,7 +20,7 @@ class PythonVersions implements VersionsInterface
 
 	public function getFilterValue()
 	{
-		return 'div#download-python > p > a';
+		return 'div#intro > p';
 	}
 
 	public function getCallback()
@@ -28,7 +28,7 @@ class PythonVersions implements VersionsInterface
 		return function ($items) {
 			$filtered_replace_items = array();
 			foreach ($items as $item) {
-				if (preg_match('/^Python ([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,})$/', $item, $m)) {
+				if (preg_match('/Current Version: v([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,})$/', $item, $m)) {
 					$filtered_replace_items[] = $m[1];
 				}
 			}
@@ -41,8 +41,8 @@ class PythonVersions implements VersionsInterface
 	{
 		$version = null;
 
-		$version_str = exec('/usr/bin/env python -V 2>&1');
-		if (preg_match('/^.*([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}).*$/', $version_str, $m)) {
+		$version_str = exec('/usr/bin/env node --version 2>&1');
+		if (preg_match('/^.*v([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}).*$/', $version_str, $m)) {
 			$version = $m[1];
 		}
 

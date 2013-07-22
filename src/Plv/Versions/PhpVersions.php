@@ -26,6 +26,7 @@ class PhpVersions implements VersionsInterface
 	public function getCallback()
 	{
 		return function ($items) {
+			$filtered_replace_items = array();
 			foreach ($items as $item) {
 				if (preg_match('/^([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(RC[0-9]{1,})?)/', $item, $m)) {
 					$filtered_replace_items[] = $m[1];
