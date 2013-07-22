@@ -31,7 +31,7 @@ Usage
 Check programming language version
 
 ```
-/path/to/install/bin/plv check [perl|php|python|ruby]
+/path/to/install/bin/plv check [nodejs|perl|php|python|ruby]
 ```
 
 List of programming language that supports
