@@ -1,0 +1,16 @@
+language: php
+php:
+  - "5.3.3"
+  - "5.3"
+  - "5.4"
+  - "5.5"
+before_script:
+  - php composer.phar install
+  - cp phpunit.xml.dist phpunit.xml
+script:
+  - phpunit
+notifications:
+  emails:
+    - nagodon@gmail.com
+  on_success: always
+  on_failure: always
