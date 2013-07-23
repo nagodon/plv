@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/isam/plv.png?branch=master)](https://travis-ci.org/isam/plv)
+
 Plv, a Programming language version check tools
 ===============================================
 
