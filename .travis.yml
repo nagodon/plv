@@ -5,8 +5,8 @@ php:
   - "5.4"
   - "5.5"
 before_script:
-  - php composer.phar install
-  - cp phpunit.xml.dist phpunit.xml
+  - composer install
+  - cp ./phpunit.xml.dist ./phpunit.xml
 script:
   - phpunit
 notifications:
