@@ -20,7 +20,10 @@ class ScalaVersions implements VersionsInterface
 
 	public function getFilterValue()
 	{
-		return 'div.content > p > strong';
+		return array(
+			'div.main-page-column > p',
+			'div.main-page-column > ul > li'
+		);
 	}
 
 	public function getCallback()
@@ -28,7 +31,7 @@ class ScalaVersions implements VersionsInterface
 		return function ($items) {
 			$filtered_replace_items = array();
 			foreach ($items as $item) {
-				if (preg_match('/(?:Scala )?([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,})/', $item, $m)) {
+				if (preg_match('/Scala ([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(:?\-[\w]+)?)/', $item, $m)) {
 					$filtered_replace_items[] = $m[1];
 				}
 			}

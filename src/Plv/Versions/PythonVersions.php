@@ -20,7 +20,7 @@ class PythonVersions implements VersionsInterface
 
 	public function getFilterValue()
 	{
-		return 'div#download-python > p > a';
+		return array('div#download-python > p > a');
 	}
 
 	public function getCallback()

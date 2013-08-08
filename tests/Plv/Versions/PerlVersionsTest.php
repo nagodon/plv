@@ -36,24 +36,27 @@ class PerlVersionsTest extends \PHPUnit_Framework_TestCase
 		$pv = new PerlVersions();
 
 		$crawler->addHtmlContent($this->html);
-		$items = $crawler->filter($pv->getFilterValue());
+		$filters = $pv->getFilterValue();
 
-		$this->assertSame('div#short_lists > div.quick_links > div.list > p > a', $pv->getFilterValue());
+		$items = array();
+		foreach ($filters as $filter) {
+			$items = array_merge($items, $crawler->filter($filter)->each(function (Crawler $crawler, $i) {
+				return $crawler->text();
+			}));
+		}
+
+		$this->assertSame(array('div#short_lists > div.quick_links > div.list > p > a'), $pv->getFilterValue());
 		$this->assertGreaterThan(1, count($items));
+		return $items;
 	}
 
-	public function testGetCallback()
+	/**
+	 * @depends	testGetFilterValue
+	 */
+	public function testGetCallback($items)
 	{
-		$crawler = new Crawler();
 		$pv = new PerlVersions();
-
 		$callback = $pv->getCallback();
-		$crawler->addHtmlContent($this->html);
-
-		$items = $crawler->filter($pv->getFilterValue())->each(function ($crawler, $i) {
-			return $crawler->text();
-		});
-
 		$version_str = $callback($items);
 
 		$this->assertTrue(is_callable($callback));

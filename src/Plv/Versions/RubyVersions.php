@@ -20,7 +20,7 @@ class RubyVersions implements VersionsInterface
 
 	public function getFilterValue()
 	{
-		return 'div#content > ul > li';
+		return array('div#content > ul > li');
 	}
 
 	public function getCallback()
