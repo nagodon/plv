@@ -20,7 +20,7 @@ class PerlVersions implements VersionsInterface
 
 	public function getFilterValue()
 	{
-		return 'div#short_lists > div.quick_links > div.list > p > a';
+		return array('div#short_lists > div.quick_links > div.list > p > a');
 	}
 
 	public function getCallback()

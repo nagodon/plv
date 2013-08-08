@@ -20,7 +20,7 @@ class NodejsVersions implements VersionsInterface
 
 	public function getFilterValue()
 	{
-		return 'div#intro > p';
+		return array('div#intro > p');
 	}
 
 	public function getCallback()

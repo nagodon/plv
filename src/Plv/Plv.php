@@ -21,19 +21,30 @@ class Plv
 	public function execute()
 	{
 		$output = new ConsoleOutput();
+		$client = new Client();
 
 		foreach ($this->versions as $versions) {
 			$output->writeln(sprintf("<info>Check the version of %s</info>", $versions->getName()));
 
-			$client = new Client();
-			$items = $client->request('GET', $versions->getUrl())->filter($versions->getFilterValue())->each(function (Crawler $crawler, $i) {
-				return $crawler->text();
-			});
+			$filters = $versions->getFilterValue();
+
+			$items = array();
+			foreach ($filters as $filter) {
+				$current_items = $client->request('GET', $versions->getUrl())->filter($filter)->each(function (Crawler $crawler, $i) {
+					return $crawler->text();
+				});
+
+				$items = array_merge($items, $current_items);
+			}
 
 			$callback = $versions->getCallback();
 			if (is_callable($callback)) {
 				$items = $callback($items);
 			}
+
+			usort($items, function ($left, $right) {
+				return version_compare($right, $left);
+			});
 
 			$installed_version = $versions->getInstalledVersion();
 			if (is_null($installed_version)) {

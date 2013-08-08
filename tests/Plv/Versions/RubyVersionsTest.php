@@ -36,24 +36,27 @@ class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 		$rv = new RubyVersions();
 
 		$crawler->addHtmlContent($this->html);
-		$items = $crawler->filter($rv->getFilterValue());
+		$filters = $rv->getFilterValue();
 
-		$this->assertSame('div#content > ul > li', $rv->getFilterValue());
+		$items = array();
+		foreach ($filters as $filter) {
+			$items = array_merge($items, $crawler->filter($filter)->each(function (Crawler $crawler, $i) {
+				return $crawler->text();
+			}));
+		}
+
+		$this->assertSame(array('div#content > ul > li'), $rv->getFilterValue());
 		$this->assertGreaterThanOrEqual(3, count($items));
+		return $items;
 	}
 
-	public function testGetCallback()
+	/**
+	 * @depends	testGetFilterValue
+	 */
+	public function testGetCallback($items)
 	{
-		$crawler = new Crawler();
 		$rv = new RubyVersions();
-
 		$callback = $rv->getCallback();
-		$crawler->addHtmlContent($this->html);
-
-		$items = $crawler->filter($rv->getFilterValue())->each(function ($crawler, $i) {
-			return $crawler->text();
-		});
-
 		$version_str = $callback($items);
 
 		$this->assertTrue(is_callable($callback));

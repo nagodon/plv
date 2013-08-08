@@ -36,24 +36,27 @@ class PythonVersionsTest extends \PHPUnit_Framework_TestCase
 		$pv = new PythonVersions();
 
 		$crawler->addHtmlContent($this->html);
-		$items = $crawler->filter($pv->getFilterValue());
+		$filters = $pv->getFilterValue();
 
-		$this->assertSame('div#download-python > p > a', $pv->getFilterValue());
+		$items = array();
+		foreach ($filters as $filter) {
+			$items = array_merge($items, $crawler->filter($filter)->each(function (Crawler $crawler, $i) {
+				return $crawler->text();
+			}));
+		}
+
+		$this->assertSame(array('div#download-python > p > a'), $pv->getFilterValue());
 		$this->assertGreaterThanOrEqual(2, count($items));
+		return $items;
 	}
 
-	public function testGetCallback()
+	/**
+	 * @depends	testGetFilterValue
+	 */
+	public function testGetCallback($items)
 	{
-		$crawler = new Crawler();
 		$pv = new PythonVersions();
-
 		$callback = $pv->getCallback();
-		$crawler->addHtmlContent($this->html);
-
-		$items = $crawler->filter($pv->getFilterValue())->each(function ($crawler, $i) {
-			return $crawler->text();
-		});
-
 		$version_str = $callback($items);
 
 		$this->assertTrue(is_callable($callback));
