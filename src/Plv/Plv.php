@@ -89,6 +89,6 @@ class Plv
 
 	public static function toLanguageName(\SplFileInfo $file)
 	{
-		return strtolower(substr(basename($file->getRealpath()), 0, -12));
+		return strtolower(substr(basename($file), 0, -12));
 	}
 }

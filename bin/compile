@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../vendor/autoload.php';
+
+use Plv\Compiler;
+
+error_reporting(-1);
+ini_set('display_errors', 1);
+
+try {
+    $compiler = new Compiler();
+    $compiler->compile();
+} catch (\Exception $e) {
+    printf('Failed to compile phar: [%s] %s at %s:%s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine());
+    exit(1);
+}

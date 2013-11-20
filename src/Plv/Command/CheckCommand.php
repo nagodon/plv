@@ -39,6 +39,8 @@ class CheckCommand extends Command
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$args = $input->getArguments();
+		$classes = array();
+
 		if ('' != $args['value']) {
 			$language_name = $args['value'];
 			$class_name = sprintf(VERSIONS_CLASS_NAME_FORMAT, ucfirst($language_name));
