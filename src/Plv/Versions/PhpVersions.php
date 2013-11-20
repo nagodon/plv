@@ -20,7 +20,7 @@ class PhpVersions implements VersionsInterface
 
 	public function getFilterValue()
 	{
-		return array('span.release');
+		return array('a.download-link');
 	}
 
 	public function getCallback()

@@ -45,7 +45,7 @@ class PhpVersionsTest extends \PHPUnit_Framework_TestCase
 			}));
 		}
 
-		$this->assertSame(array('span.release'), $pv->getFilterValue());
+		$this->assertSame(array('a.download-link'), $pv->getFilterValue());
 		$this->assertGreaterThanOrEqual(3, count($items));
 		return $items;
 	}
