@@ -1,9 +1,22 @@
 <?php
 
+/*
+ * This file is part of the Plv package.
+ *
+ * (c) Isam Nagoya <nagodon@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Plv\Versions;
 
 use Plv\Versions\VersionsInterface;
 
+/**
+ * PythonVersions represents an python version.
+ *
+ * @author Isam Nagoya <nagodon@gmail.com>
+ */
 class PythonVersions implements VersionsInterface
 {
 	private $url = 'http://www.python.org/download/';
