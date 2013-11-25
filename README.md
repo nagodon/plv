@@ -10,37 +10,28 @@ Plv requires PHP 5.3.3(or later)
 Installation
 ============
 
-Install composer in your directory:
+Download the plv.phar executable.
 
 ```
-curl -s http://getcomposer.org/installer | php
-```
-
-[Download][1] latest version
-
-or
-
-Create project via composer:
-
-```
-php composer.phar create-project plv/plv /path/to/install version
+$ curl -s http://isam.github.io/plv/plv.phar
 ```
 
 Usage
 =====
 
-Check programming language version
+Display of each programing language version.
 
 ```
-/path/to/install/bin/plv check [nodejs|perl|php|python|ruby|scala]
+$ php plv.phar check [nodejs|perl|php|python|ruby|scala]
 ```
 
-List of programming language that supports
+Display of list of supported programing language.
 
 ```
-/path/to/install/bin/plv language
+$ php plv.phar language
 ```
 
-[1]: https://github.com/isam/plv/releases
+License
+=======
 
-
+Plv is licensed under the MIT License - see the LICENSE file for details
