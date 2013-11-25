@@ -8,14 +8,14 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class NodejsVersionsTest extends \PHPUnit_Framework_TestCase
 {
-	private $html;
-	private $url = 'http://nodejs.org/';
+	protected static $html;
+	protected static $url = 'http://nodejs.org/';
 
-	protected function setup()
+	public static function setupBeforeClass()
 	{
 		$client = new Client();
-		$client->request('GET', $this->url);
-		$this->html = $client->getResponse()->getContent();
+		$client->request('GET', static::$url);
+		static::$html = $client->getResponse()->getContent();
 	}
 
 	public function testGetName()
@@ -27,7 +27,7 @@ class NodejsVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$pv = new NodejsVersions();
-		$this->assertSame($this->url, $pv->getUrl());
+		$this->assertSame(static::$url, $pv->getUrl());
 	}
 
 	public function testGetFilterValue()
@@ -35,7 +35,7 @@ class NodejsVersionsTest extends \PHPUnit_Framework_TestCase
 		$crawler = new Crawler();
 		$pv = new NodejsVersions();
 
-		$crawler->addHtmlContent($this->html);
+		$crawler->addHtmlContent(static::$html);
 		$filters = $pv->getFilterValue();
 
 		$items = array();

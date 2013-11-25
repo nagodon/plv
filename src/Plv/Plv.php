@@ -1,19 +1,32 @@
 <?php
+/*
+ * This file is part of the Plv package.
+ *
+ * (c) Isam Nagoya <nagodon@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Plv;
 
-use Plv\Collection\VersionsCollection;
+use \ArrayIterator;
 use Plv\Versions\VersionsInterface;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Finder\Finder;
 
+/**
+ * Plv.
+ *
+ * @author Isam Nagoya <nagodon@gmail.com>
+ */
 class Plv
 {
 	private $versions;
 
-	public function __construct(VersionsCollection $versions)
+	public function __construct(ArrayIterator $versions)
 	{
 		$this->versions = $versions;
 	}
@@ -76,6 +89,6 @@ class Plv
 
 	public static function toLanguageName(\SplFileInfo $file)
 	{
-		return strtolower(substr(basename($file->getRealpath()), 0, -12));
+		return strtolower(substr(basename($file), 0, -12));
 	}
 }

@@ -1,14 +1,28 @@
 <?php
 
+/*
+ * This file is part of the Plv package.
+ *
+ * (c) Isam Nagoya <nagodon@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Plv\Command;
 
 use Plv\Plv;
-use Plv\Collection\VersionsCollection;
+use \ArrayIterator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * CheckCommand displays the each programing language version.
+ *
+ * @author Isam Nagoya <nagodon@gmail.com>
+ */
 class CheckCommand extends Command
 {
 	protected function configure()
@@ -25,6 +39,8 @@ class CheckCommand extends Command
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$args = $input->getArguments();
+		$classes = array();
+
 		if ('' != $args['value']) {
 			$language_name = $args['value'];
 			$class_name = sprintf(VERSIONS_CLASS_NAME_FORMAT, ucfirst($language_name));
@@ -42,7 +58,7 @@ class CheckCommand extends Command
 			}
 		}
 
-		$versions_collection = new VersionsCollection();
+		$versions_collection = new ArrayIterator();
 		foreach ($classes as $class) {
 			$versions_collection->append(new $class);
 		}
