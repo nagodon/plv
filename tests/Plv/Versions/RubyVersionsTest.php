@@ -8,14 +8,14 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 {
-	private $html;
-	private $url = 'http://www.ruby-lang.org/ja/downloads/';
+	protected static $html;
+	protected static $url = 'http://www.ruby-lang.org/ja/downloads/';
 
-	protected function setup()
+	public static function setupBeforeClass()
 	{
 		$client = new Client();
-		$client->request('GET', $this->url);
-		$this->html = $client->getResponse()->getContent();
+		$client->request('GET', static::$url);
+		static::$html = $client->getResponse()->getContent();
 	}
 
 	public function testGetName()
@@ -27,7 +27,7 @@ class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$rv = new RubyVersions();
-		$this->assertSame($this->url, $rv->getUrl());
+		$this->assertSame(static::$url, $rv->getUrl());
 	}
 
 	public function testGetFilterValue()
@@ -35,7 +35,7 @@ class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 		$crawler = new Crawler();
 		$rv = new RubyVersions();
 
-		$crawler->addHtmlContent($this->html);
+		$crawler->addHtmlContent(static::$html);
 		$filters = $rv->getFilterValue();
 
 		$items = array();
