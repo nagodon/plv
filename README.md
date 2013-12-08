@@ -13,7 +13,7 @@ Installation
 Download the plv.phar executable.
 
 ```
-$ curl -s http://isam.github.io/plv/plv.phar
+$ curl -LO http://isam.github.io/plv/plv.phar
 ```
 
 Usage
