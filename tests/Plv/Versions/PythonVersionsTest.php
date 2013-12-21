@@ -9,13 +9,10 @@ use Symfony\Component\DomCrawler\Crawler;
 class PythonVersionsTest extends \PHPUnit_Framework_TestCase
 {
 	protected static $html;
-	protected static $url = 'http://www.python.org/download/';
 
 	public static function setupBeforeClass()
 	{
-		$client = new Client();
-		$client->request('GET', static::$url);
-		static::$html = $client->getResponse()->getContent();
+		static::$html = file_get_contents(__DIR__.'/../../Fixtures/python.html');
 	}
 
 	public function testGetName()
@@ -27,7 +24,7 @@ class PythonVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$pv = new PythonVersions();
-		$this->assertSame(static::$url, $pv->getUrl());
+		$this->assertSame('http://www.python.org/download/', $pv->getUrl());
 	}
 
 	public function testGetFilterValue()

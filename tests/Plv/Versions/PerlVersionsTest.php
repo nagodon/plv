@@ -9,13 +9,10 @@ use Symfony\Component\DomCrawler\Crawler;
 class PerlVersionsTest extends \PHPUnit_Framework_TestCase
 {
 	protected static $html;
-	protected static $url = 'http://perl.org/';
 
 	public static function setupBeforeClass()
 	{
-		$client = new Client();
-		$client->request('GET', static::$url);
-		static::$html = $client->getResponse()->getContent();
+		static::$html = file_get_contents(__DIR__.'/../../Fixtures/perl.html');
 	}
 
 	public function testGetName()
@@ -27,7 +24,7 @@ class PerlVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$pv = new PerlVersions();
-		$this->assertSame(static::$url, $pv->getUrl());
+		$this->assertSame('http://perl.org/', $pv->getUrl());
 	}
 
 	public function testGetFilterValue()

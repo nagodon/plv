@@ -9,13 +9,10 @@ use Symfony\Component\DomCrawler\Crawler;
 class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 {
 	protected static $html;
-	protected static $url = 'http://www.ruby-lang.org/ja/downloads/';
 
 	public static function setupBeforeClass()
 	{
-		$client = new Client();
-		$client->request('GET', static::$url);
-		static::$html = $client->getResponse()->getContent();
+		static::$html = file_get_contents(__DIR__.'/../../Fixtures/ruby.html');
 	}
 
 	public function testGetName()
@@ -27,7 +24,7 @@ class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$rv = new RubyVersions();
-		$this->assertSame(static::$url, $rv->getUrl());
+		$this->assertSame('http://www.ruby-lang.org/ja/downloads/', $rv->getUrl());
 	}
 
 	public function testGetFilterValue()

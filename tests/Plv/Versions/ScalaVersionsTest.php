@@ -9,13 +9,10 @@ use Symfony\Component\DomCrawler\Crawler;
 class ScalaVersionsTest extends \PHPUnit_Framework_TestCase
 {
 	protected static $html;
-	protected static $url = 'http://www.scala-lang.org/downloads';
 
 	public static function setupBeforeClass()
 	{
-		$client = new Client();
-		$client->request('GET', static::$url);
-		static::$html = $client->getResponse()->getContent();
+		static::$html = file_get_contents(__DIR__.'/../../Fixtures/scala.html');
 	}
 
 	public function testGetName()
@@ -27,7 +24,7 @@ class ScalaVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$pv = new ScalaVersions();
-		$this->assertSame(static::$url, $pv->getUrl());
+		$this->assertSame('http://www.scala-lang.org/downloads', $pv->getUrl());
 	}
 
 	public function testGetFilterValue()
@@ -45,7 +42,7 @@ class ScalaVersionsTest extends \PHPUnit_Framework_TestCase
 			}));
 		}
 
-		$this->assertSame(array('div.main-page-column > p', 'div.main-page-column > ul > li'), $pv->getFilterValue());
+		$this->assertSame(array('div.main-page-column > div.bigcircle-wrapper > div.bigcircle-content > p.center', 'div.main-page-column > ul > li'), $pv->getFilterValue());
 		$this->assertGreaterThanOrEqual(3, count($items));
 		return $items;
 	}
@@ -60,7 +57,7 @@ class ScalaVersionsTest extends \PHPUnit_Framework_TestCase
 		$version_str = $callback($items);
 
 		$this->assertTrue(is_callable($callback));
-		$this->assertGreaterThanOrEqual(3, count($version_str));
+		$this->assertGreaterThanOrEqual(2, count($version_str));
 		foreach ($version_str as $str) {
 			$this->assertRegExp('/^[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/', $str);
 		}

@@ -40,10 +40,11 @@ class Plv
 			$output->writeln(sprintf("<info>Check the version of %s</info>", $versions->getName()));
 
 			$filters = $versions->getFilterValue();
+			$crawler = $client->request('GET', $versions->getUrl());
 
 			$items = array();
 			foreach ($filters as $filter) {
-				$current_items = $client->request('GET', $versions->getUrl())->filter($filter)->each(function (Crawler $crawler, $i) {
+				$current_items = $crawler->filter($filter)->each(function (Crawler $crawler, $i) {
 					return $crawler->text();
 				});
 
