@@ -35,7 +35,7 @@ class ScalaVersions implements VersionsInterface
 	public function getFilterValue()
 	{
 		return array(
-			'div.main-page-column > p',
+			'div.main-page-column > div.bigcircle-wrapper > div.bigcircle-content > p.center',
 			'div.main-page-column > ul > li'
 		);
 	}

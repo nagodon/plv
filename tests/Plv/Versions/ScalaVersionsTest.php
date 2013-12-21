@@ -45,7 +45,7 @@ class ScalaVersionsTest extends \PHPUnit_Framework_TestCase
 			}));
 		}
 
-		$this->assertSame(array('div.main-page-column > p', 'div.main-page-column > ul > li'), $pv->getFilterValue());
+		$this->assertSame(array('div.main-page-column > div.bigcircle-wrapper > div.bigcircle-content > p.center', 'div.main-page-column > ul > li'), $pv->getFilterValue());
 		$this->assertGreaterThanOrEqual(3, count($items));
 		return $items;
 	}
@@ -60,7 +60,7 @@ class ScalaVersionsTest extends \PHPUnit_Framework_TestCase
 		$version_str = $callback($items);
 
 		$this->assertTrue(is_callable($callback));
-		$this->assertGreaterThanOrEqual(3, count($version_str));
+		$this->assertGreaterThanOrEqual(2, count($version_str));
 		foreach ($version_str as $str) {
 			$this->assertRegExp('/^[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/', $str);
 		}
