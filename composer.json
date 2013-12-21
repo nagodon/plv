@@ -2,7 +2,8 @@
     "name": "plv/plv",
     "description": "Programming language version check tool",
     "keywords": ["cli", "programming language", "version"],
-    "homepage": "https://github.com/isam/plv",
+    "homepage": "http://isam.github.io/plv",
+    "license": "MIT",
     "authors": [
        {
            "name": "Isamu Nagoya",
@@ -22,11 +23,6 @@
     "autoload": {
         "psr-0": {
             "Plv": "src/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.0-dev"
         }
     }
 }
