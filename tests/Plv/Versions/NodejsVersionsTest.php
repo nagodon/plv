@@ -9,13 +9,10 @@ use Symfony\Component\DomCrawler\Crawler;
 class NodejsVersionsTest extends \PHPUnit_Framework_TestCase
 {
 	protected static $html;
-	protected static $url = 'http://nodejs.org/';
 
 	public static function setupBeforeClass()
 	{
-		$client = new Client();
-		$client->request('GET', static::$url);
-		static::$html = $client->getResponse()->getContent();
+		static::$html = file_get_contents(__DIR__.'/../../Fixtures/nodejs.html');
 	}
 
 	public function testGetName()
@@ -27,7 +24,7 @@ class NodejsVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$pv = new NodejsVersions();
-		$this->assertSame(static::$url, $pv->getUrl());
+		$this->assertSame('http://nodejs.org/', $pv->getUrl());
 	}
 
 	public function testGetFilterValue()

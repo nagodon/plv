@@ -9,13 +9,10 @@ use Symfony\Component\DomCrawler\Crawler;
 class PhpVersionsTest extends \PHPUnit_Framework_TestCase
 {
 	protected static $html;
-	protected static $url = 'http://php.net/';
 
 	public static function setupBeforeClass()
 	{
-		$client = new Client();
-		$client->request('GET', static::$url);
-		static::$html = $client->getResponse()->getContent();
+		static::$html = file_get_contents(__DIR__.'/../../Fixtures/php.html');
 	}
 
 	public function testGetName()
@@ -27,7 +24,7 @@ class PhpVersionsTest extends \PHPUnit_Framework_TestCase
 	public function testGetUrl()
 	{
 		$pv = new PhpVersions();
-		$this->assertSame(static::$url, $pv->getUrl());
+		$this->assertSame('http://php.net/', $pv->getUrl());
 	}
 
 	public function testGetFilterValue()
