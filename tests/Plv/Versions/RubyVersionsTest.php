@@ -43,7 +43,7 @@ class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$this->assertSame(array('div#content > ul > li'), $rv->getFilterValue());
-		$this->assertGreaterThanOrEqual(2, count($items));
+		$this->assertGreaterThanOrEqual(3, count($items));
 		return $items;
 	}
 
@@ -57,7 +57,7 @@ class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 		$version_str = $callback($items);
 
 		$this->assertTrue(is_callable($callback));
-		$this->assertGreaterThanOrEqual(2, count($version_str));
+		$this->assertGreaterThanOrEqual(3, count($version_str));
 		foreach ($version_str as $str) {
 			$this->assertRegExp('/^[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/', $str);
 		}

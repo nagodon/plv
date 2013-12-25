@@ -103,16 +103,14 @@
 <p>Rubyの各バージョンのソースコードは、以下から入手できます。</p>
 
 <ul>
-  <li>最新の安定版であるruby
-2.0.0-p353[<a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.bz2">tar.bz2</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz">tar.gz</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.zip">zip</a>]が各ミラーサイトから入手できます。</li>
-  <li>前世代の安定版であるruby
-1.9.3-p484[<a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.tar.bz2">tar.bz2</a>|<a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.tar.gz">tar.gz</a>|<a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.zip">zip</a>]が各ミラーサイトから入手できます。</li>
-  <li>現時点での最新版スナップショット[<a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.tar.bz2">tar.bz2</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.tar.gz">tar.gz</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.zip">zip</a>]が各ミラーサイトから入手できます。これはSubversionレポジトリのtrunkの先端(HEAD)から自動的にスナップショットを取ったものです。スナップショットの取得はある時刻に問答無用で行っているので、何らかの問題が残っている可能性があります。自己責任でどうぞ。</li>
-  <li>現時点での安定版スナップショット[<a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.tar.bz2">tar.bz2</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.tar.gz">tar.gz</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.zip">zip</a>]が各ミラーサイトから入手できます。これはSubversionレポジトリのruby
-2.0系のブランチ(ruby_2_0_0ブランチ)の先端から自動的にスナップショットを取ったものです。</li>
-  <li>最新のソースをAnonymous
-SVNで入手する方法については、<a href="/ja/documentation/repository-guide">レポジトリガイド</a>を参照ください。</li>
+  <li>最新の安定版であるruby 2.1.0[<a href="http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.0.tar.bz2">tar.bz2</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.0.tar.gz">tar.gz</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.0.zip">zip</a>]が各ミラーサイトから入手できます。</li>
+  <li>前世代の安定版であるruby 2.0.0-p353[<a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.bz2">tar.bz2</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz">tar.gz</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.zip">zip</a>]が各ミラーサイトから入手できます。</li>
+  <li>前々世代の安定版であるruby 1.9.3-p484[<a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.tar.bz2">tar.bz2</a>|<a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.tar.gz">tar.gz</a>|<a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.zip">zip</a>]が各ミラーサイトから入手できます。</li>
+  <li>現時点での安定版スナップショット[<a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.tar.bz2">tar.bz2</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.tar.gz">tar.gz</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.zip">zip</a>]が各ミラーサイトから入手できます。これはSubversionレポジトリのruby 2.1系のブランチ(ruby_2_1ブランチ)の先端から自動的にスナップショットを取ったものです。</li>
+  <li>現時点での最新版スナップショット[<a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.tar.bz2">tar.bz2</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.tar.gz">tar.gz</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.zip">zip</a>]が各ミラーサイトから入手できます。これはSubversionレポジトリのtrunkの先端(HEAD)から自動的にスナップショットを取ったものです。最新版スナップショットには、何らかの問題や不具合が残っている可能性があります。自己責任でご利用下さい。</li>
 </ul>
+
+<p>最新のソースを Subversion と Git のリポジトリから入手する方法については、<a href="/ja/documentation/repository-guide">レポジトリガイド</a>を参照してください。</p>
 
 <h2>Windows版Rubyバイナリ</h2>
 
@@ -121,9 +119,10 @@ SVNで入手する方法については、<a href="/ja/documentation/repository-
 <ul>
   <li><a href="http://www.artonx.org/data/asr/">ActiveScriptRuby</a>
 安定版に幾つかの便利なライブラリを加え、さらにRubyをCOMサーバとしても利用可能にしたもの。ベースはmswin32版</li>
-  <li><a href="http://rubyinstaller.org/">One-Click Ruby Installer for Windows</a> (英語)
+  <li><a href="http://rubyinstaller.org/">RubyInstaller</a> (英語)
 安定版に多数の便利なライブラリを加えたもの。ベースはmingw32版</li>
-  <li><a href="https://ftp.ruby-lang.org/pub/ruby/binaries/">cygwin,djgpp,mingw,mswin32</a></li>
+  <li><a href="http://railsinstaller.org/">RailsInstaller</a> (英語)
+RubyInstaller に Rails の開発に必要なものを加えたもの。</li>
 </ul>
 
 <h2>ミラーサイト</h2>
