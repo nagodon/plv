@@ -2,11 +2,11 @@
     "name": "plv/plv",
     "description": "Programming language version check tool",
     "keywords": ["cli", "programming language", "version"],
-    "homepage": "http://isam.github.io/plv",
+    "homepage": "http://nagodon.github.io/plv",
     "license": "MIT",
     "authors": [
        {
-           "name": "Isamu Nagoya",
+           "name": "nagodon",
            "email": "nagodon@gmail.com"
        }
     ],

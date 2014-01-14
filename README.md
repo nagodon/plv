@@ -1,6 +1,6 @@
 Plv, a Programming language version check tools
 ===============================================
-[![Build Status](https://travis-ci.org/isam/plv.png?branch=master)](https://travis-ci.org/isam/plv)
+[![Build Status](https://travis-ci.org/nagodon/plv.png?branch=master)](https://travis-ci.org/nagodon/plv)
 
 Requirements
 ============
@@ -13,7 +13,7 @@ Installation
 Download the plv.phar executable.
 
 ```
-$ curl -LO http://isam.github.io/plv/plv.phar
+$ curl -LO http://nagodon.github.io/plv/plv.phar
 ```
 
 Usage
