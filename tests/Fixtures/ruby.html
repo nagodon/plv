@@ -15,8 +15,14 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/mobile.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/print.css">
     <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic&amp;subset=latin,cyrillic,greek,vietnamese' rel='stylesheet' type='text/css'>
+    <link rel="canonical" href="https://www.ruby-lang.org/ja/downloads/" />
 
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    
+  
+
+    <link href="/ja/feeds/news.rss" rel="alternate" title="最近のニュース (RSS)" type="application/rss+xml" />
+
 
     <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/page.js"></script>
@@ -98,21 +104,62 @@
   <div id="content">
     <p>ここでは、Rubyインタプリタの代表的な入手方法を説明します。</p>
 
-<h2>Rubyのソースコード</h2>
+<p>現在の安定版は 2.1.0です。
+<a href="/en/about/license.txt">Ruby’sライセンス</a>を必ずお読み下さい。</p>
 
-<p>Rubyの各バージョンのソースコードは、以下から入手できます。</p>
+<h3>Rubyのインストール方法</h3>
+
+<p>メジャーなプラットフォームでは Ruby をインストールする方法はいくつかあります。</p>
 
 <ul>
-  <li>最新の安定版であるruby 2.1.0[<a href="http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.0.tar.bz2">tar.bz2</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.0.tar.gz">tar.gz</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.0.zip">zip</a>]が各ミラーサイトから入手できます。</li>
-  <li>前世代の安定版であるruby 2.0.0-p353[<a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.bz2">tar.bz2</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz">tar.gz</a>|<a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.zip">zip</a>]が各ミラーサイトから入手できます。</li>
-  <li>前々世代の安定版であるruby 1.9.3-p484[<a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.tar.bz2">tar.bz2</a>|<a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.tar.gz">tar.gz</a>|<a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.zip">zip</a>]が各ミラーサイトから入手できます。</li>
-  <li>現時点での安定版スナップショット[<a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.tar.bz2">tar.bz2</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.tar.gz">tar.gz</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.zip">zip</a>]が各ミラーサイトから入手できます。これはSubversionレポジトリのruby 2.1系のブランチ(ruby_2_1ブランチ)の先端から自動的にスナップショットを取ったものです。</li>
-  <li>現時点での最新版スナップショット[<a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.tar.bz2">tar.bz2</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.tar.gz">tar.gz</a>|<a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.zip">zip</a>]が各ミラーサイトから入手できます。これはSubversionレポジトリのtrunkの先端(HEAD)から自動的にスナップショットを取ったものです。最新版スナップショットには、何らかの問題や不具合が残っている可能性があります。自己責任でご利用下さい。</li>
+  <li>Linux/UNIX マシンでは、そのシステムのパッケージ管理ツールや、rbenv、RVMなどのサードパーティツールが使えます。</li>
+  <li>OS Xマシンでは、rbenv、RVMなどのサードパーティのパッケージ管理ツールが使えます。</li>
+  <li>Windowsマシンでは、RubyInstallerやpikといったツールが使えます。</li>
 </ul>
 
-<p>最新のソースを Subversion と Git のリポジトリから入手する方法については、<a href="/ja/documentation/repository-guide">レポジトリガイド</a>を参照してください。</p>
+<p>各パッケージマネージャ及びサードパーティーツールの詳細は、<a href="/ja/installation">インストールガイド</a> ページを参照して下さい。</p>
 
-<h2>Windows版Rubyバイナリ</h2>
+<p>もちろん、メジャーなプラットフォームでソースからRubyをインストールすることも可能です。</p>
+
+<h3>ソースコードからRubyをコンパイルする</h3>
+
+<p>ソースコードからのインストールは、利用したいプラットフォームや環境に合った設定を使うことができる、いい方法です。
+また、利用したいプラットフォーム向けのパッケージが存在しない場合にも使えるいい方法でもあります。</p>
+
+<p>もしコンパイルで問題がある場合、<a href="/ja/installation">インストールガイド</a> ページで解説しているサードパーティーツールの利用が助けになるかもしれません。</p>
+
+<ul>
+  <li>
+    <p><strong>最新の安定版:</strong> <a href="http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.0.tar.gz">Ruby 2.1.0</a><br />
+md5: 9e6386d53f5200a3e7069107405b93f7</p>
+  </li>
+  <li>
+    <p><strong>前世代の安定版:</strong> <a href="http://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p353.tar.gz">Ruby 2.0.0-p353</a><br />
+md5: 78282433fb697dd3613613ff55d734c1</p>
+  </li>
+  <li>
+    <p><strong>古い安定版:</strong> <a href="http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p484.tar.gz">Ruby 1.9.3-p484</a><br />
+md5: 8ac0dee72fe12d75c8b2d0ef5d0c2968</p>
+  </li>
+  <li>
+    <p><strong>スナップショット:</strong></p>
+
+    <ul>
+      <li><a href="https://ftp.ruby-lang.org/pub/ruby/stable-snapshot.tar.gz">安定版のスナップショット</a>:
+最も新しい現在の安定版ブランチのスナップショットのtarballです。</li>
+      <li><a href="https://ftp.ruby-lang.org/pub/ruby/snapshot.tar.gz">ナイトリースナップショット</a>:
+毎晩SVNに入っているものから作成しているtarballです。
+バグやその他の問題があるかもしれません。利用する場合は自己責任でお願いします！</li>
+    </ul>
+  </li>
+</ul>
+
+<p>RubyのSubversionやGitリポジトリについての情報は、<a href="/ja/documentation/repository-guide">リポジトリガイド</a>を参照してください。</p>
+
+<p>Rubyのソースコードは、世界各国の<a href="/en/downloads/mirrors/">ミラーサイト</a>からダウンロードできます。
+お近くのミラーサイトをお使いください。</p>
+
+<h3>Windows版Rubyバイナリ</h3>
 
 <p>Windows向けのバイナリが有志により配布されています。</p>
 
@@ -124,64 +171,6 @@
   <li><a href="http://railsinstaller.org/">RailsInstaller</a> (英語)
 RubyInstaller に Rails の開発に必要なものを加えたもの。</li>
 </ul>
-
-<h2>ミラーサイト</h2>
-
-<p>Rubyのソースコードや、それを含めた当サイトの内容が、有志によりミラーされています。</p>
-
-<h3>HTTPミラーサイト</h3>
-
-<ul>
-  <li><a href="http://cache.ruby-lang.org/pub/ruby/">CDN</a> (fastly.com)</li>
-  <li><a href="http://www.dnsbalance.ring.gr.jp/archives/lang/ruby/">日本 1</a>及び<a href="http://www.t.ring.gr.jp/">ミラー</a> (RingServer)</li>
-  <li><a href="https://ftp.ruby-lang.org/pub/ruby/">日本 2</a> (マスターサイト) - HTTPS</li>
-  <li><a href="http://www.mirrorservice.org/sites/ftp.ruby-lang.org/pub/ruby/">イギリス</a> (The Mirror Service)</li>
-  <li><a href="http://dl.ambiweb.de/mirrors/ftp.ruby-lang.org/">ドイツ</a> (AmbiWeb GmbH)</li>
-  <li><a href="http://ruby.mirror.easynet.be/">ベルギー</a> (Easynet)</li>
-  <li><a href="http://mirrors.sunsite.dk/ruby/">デンマーク</a> (sunsite.dk)</li>
-  <li><a href="http://www.xs4all.nl/~hipster/lib/mirror/ruby/">オランダ</a> (XS4ALL) - リリース版のみ</li>
-  <li><a href="http://www.ibiblio.org/pub/languages/ruby/">アメリカ 1</a> (ibiblio.org)</li>
-  <li><a href="http://xyz.lcs.mit.edu/ruby/">アメリカ 2</a> (lcs.mit.edu)</li>
-  <li><a href="http://www.binarycode.org/ruby/">アメリカ 3</a> (binarycode.org)</li>
-  <li><a href="http://www.online-mirror.org/ruby/">アメリカ 4</a> (online-mirror.org)</li>
-  <li><a href="http://ruby.trexle.com/">アメリカ 5</a> (trexle.com)</li>
-  <li><a href="http://gd.tuwien.ac.at/languages/ruby/">オーストリア</a> (tuwien.ac.at)</li>
-  <li><a href="http://pluto.cdpa.nsysu.edu.tw/ruby/">台湾 1</a> (cdpa.nsysu.edu.tw)</li>
-  <li><a href="http://ftp.cs.pu.edu.tw/Unix/lang/Ruby/">台湾 2</a> (ftp.cs.pu.edu.tw)</li>
-</ul>
-
-<h3>FTPミラーサイト</h3>
-
-<ul>
-  <li><a href="ftp://core.ring.gr.jp/pub/lang/ruby/">日本 1</a>及び<a href="http://www.t.ring.gr.jp/">ミラー</a> (RingServer)</li>
-  <li><a href="ftp://ftp.iij.ad.jp/pub/lang/ruby/">日本 2</a> (IIJ)</li>
-  <li><a href="ftp://ftp.ruby-lang.org/pub/ruby/">日本 3</a> (マスターサイト)</li>
-  <li><a href="ftp://ftp.kr.freebsd.org/pub/ruby/">韓国</a> (Korea FreeBSD Users Group)</li>
-  <li><a href="ftp://ftp.fu-berlin.de/unix/languages/ruby/">ドイツ</a> (FU Berlin)</li>
-  <li><a href="ftp://ftp.mirrorservice.org/sites/ftp.ruby-lang.org/pub/ruby/">イギリス</a> (The Mirror Service)</li>
-  <li><a href="ftp://ftp.easynet.be/ruby/ruby/">ベルギー</a> (Easynet)</li>
-  <li><a href="ftp://ftp.chg.ru/pub/lang/ruby/">ロシア</a> (ChgNet)</li>
-  <li><a href="ftp://ftp.ntua.gr/pub/lang/ruby/">ギリシャ</a> (アテネ工科大)</li>
-  <li><a href="ftp://sunsite.dk/mirrors/ruby/">デンマーク</a> (sunsite.dk)</li>
-  <li><a href="ftp://www.ibiblio.org/pub/languages/ruby/">アメリカ 1</a> (ibiblio.org)</li>
-  <li><a href="ftp://xyz.lcs.mit.edu/pub/ruby/">アメリカ 2</a> (lcs.mit.edu)</li>
-  <li><a href="ftp://gd.tuwien.ac.at/languages/ruby/">オーストリア</a> (tuwien.ac.at)</li>
-  <li><a href="ftp://ruby.cdpa.nsysu.edu.tw/ruby/">台湾 1</a> (cdpa.nsysu.edu.tw)</li>
-  <li><a href="ftp://ftp.cs.pu.edu.tw/Unix/lang/Ruby/">台湾 2</a> (ftp.cs.pu.edu.tw)</li>
-  <li><a href="ftp://mirror.cs.mun.ca/pub/mirror/ruby/">カナダ</a> (mirror.cs.mun.ca)</li>
-</ul>
-
-<h3>Rsyncミラーサイト</h3>
-
-<ul>
-  <li>rsync://rsync.mirrorservice.org/ftp.ruby-lang.org/pub/ruby/ (イギリス)</li>
-  <li>rsync://sunsite.dk/ftp/mirrors/ruby/ (デンマーク)</li>
-  <li>rsync://gd.tuwien.ac.at/languages/ruby/ (オーストリア)</li>
-  <li>rsync://mirror.cs.mun.ca/ruby/ (カナダ)</li>
-  <li>rsync://ftp.cs.pu.edu.tw/Ruby/ (台湾)</li>
-</ul>
-
-<p class="post-info">Posted by Shugo Maeda on 26 May 2006</p>
 
 
   </div>

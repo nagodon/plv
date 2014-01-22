@@ -42,7 +42,7 @@ class RubyVersionsTest extends \PHPUnit_Framework_TestCase
 			}));
 		}
 
-		$this->assertSame(array('div#content > ul > li'), $rv->getFilterValue());
+		$this->assertSame(array('div#content > ul > li > p > a'), $rv->getFilterValue());
 		$this->assertGreaterThanOrEqual(3, count($items));
 		return $items;
 	}

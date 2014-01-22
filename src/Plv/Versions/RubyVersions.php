@@ -34,7 +34,7 @@ class RubyVersions implements VersionsInterface
 
 	public function getFilterValue()
 	{
-		return array('div#content > ul > li');
+		return array('div#content > ul > li > p > a');
 	}
 
 	public function getCallback()
@@ -42,7 +42,7 @@ class RubyVersions implements VersionsInterface
 		return function ($items) {
 			$filtered_replace_items = array();
 			foreach ($items as $item) {
-				if (preg_match('/.*([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(?:\-p[0-9]{1,})?).*$/', $item, $m)) {
+				if (preg_match('/Ruby ([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(?:\-p[0-9]{1,})?)$/', $item, $m)) {
 					$filtered_replace_items[] = strtr($m[1], array('-' => ''));
 				}
 			}
