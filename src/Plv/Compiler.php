@@ -41,8 +41,17 @@ class Compiler
 			->in(__DIR__.'/../../vendor/composer/')
 			->in(__DIR__.'/../../vendor/symfony/')
 			->in(__DIR__.'/../../vendor/fabpot/goutte/')
-			->in(__DIR__.'/../../vendor/guzzle/guzzle/src/')
+			->in(__DIR__.'/../../vendor/guzzle/')
 		;
+
+		foreach ($finder as $file) {
+			$this->addFile($phar, $file);
+		}
+
+		$finder->files()
+			->ignoreVCS(true)
+			->name("*.pem*")
+			->in(__DIR__.'/../../vendor/guzzle/');
 
 		foreach ($finder as $file) {
 			$this->addFile($phar, $file);
