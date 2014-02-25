@@ -41,6 +41,10 @@ class Plv
 
 			$filters = $versions->getFilterValue();
 			$crawler = $client->request('GET', $versions->getUrl());
+			if ('gzip' == $client->getResponse()->getHeader('Content-Encoding')) {
+				$content = gzdecode($client->getResponse()->getContent());
+				$crawler->addHtmlContent($content);
+			}
 
 			$items = array();
 			foreach ($filters as $filter) {
