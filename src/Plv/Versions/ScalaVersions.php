@@ -11,8 +11,6 @@
 
 namespace Plv\Versions;
 
-use Plv\Versions\VersionsInterface;
-
 /**
  * ScalaVersions represents an scala version.
  *
@@ -20,49 +18,49 @@ use Plv\Versions\VersionsInterface;
  */
 class ScalaVersions implements VersionsInterface
 {
-	private $url = 'http://www.scala-lang.org/downloads';
+    private $url = 'http://www.scala-lang.org/downloads';
 
-	public function getName()
-	{
-		return 'Scala';
-	}
+    public function getName()
+    {
+        return 'Scala';
+    }
 
-	public function getUrl()
-	{
-		return $this->url;
-	}
+    public function getUrl()
+    {
+        return $this->url;
+    }
 
-	public function getFilterValue()
-	{
-		return array(
-			'div.main-page-column > div.bigcircle-wrapper > div.bigcircle-content > p.center',
-			'div.main-page-column > ul > li'
-		);
-	}
+    public function getFilterValue()
+    {
+        return array(
+            'div.main-page-column > div.bigcircle-wrapper > div.bigcircle-content > p.center',
+            'div.main-page-column > ul > li'
+        );
+    }
 
-	public function getCallback()
-	{
-		return function ($items) {
-			$filtered_replace_items = array();
-			foreach ($items as $item) {
-				if (preg_match('/Scala ([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(:?\-[\w]+)?)/', $item, $m)) {
-					$filtered_replace_items[] = $m[1];
-				}
-			}
+    public function getCallback()
+    {
+        return function ($items) {
+            $filtered_replace_items = array();
+            foreach ($items as $item) {
+                if (preg_match('/Scala ([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(:?\-[\w]+)?)/', $item, $m)) {
+                    $filtered_replace_items[] = $m[1];
+                }
+            }
 
-			return $filtered_replace_items;
-		};
-	}
+            return $filtered_replace_items;
+        };
+    }
 
-	public function getInstalledVersion()
-	{
-		$version = null;
+    public function getInstalledVersion()
+    {
+        $version = null;
 
-		$version_str = exec('/usr/bin/env scala -version 2>&1');
-		if (preg_match('/^.*([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}).*$/', $version_str, $m)) {
-			$version = $m[1];
-		}
+        $version_str = exec('/usr/bin/env scala -version 2>&1');
+        if (preg_match('/^.*([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}).*$/', $version_str, $m)) {
+            $version = $m[1];
+        }
 
-		return $version;
-	}
+        return $version;
+    }
 }
