@@ -12,6 +12,7 @@ namespace Plv;
 
 use \ArrayIterator;
 use Goutte\Client;
+use Guzzle\Http\Client as GuzzleClient;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Finder\Finder;
@@ -34,6 +35,7 @@ class Plv
     {
         $output = new ConsoleOutput();
         $client = new Client();
+        $client->setClient($this->createGuzzleClient());
 
         foreach ($this->versions as $versions) {
             $output->writeln(sprintf("<info>Check the version of %s</info>", $versions->getName()));
@@ -80,6 +82,22 @@ class Plv
             $output->writeln(sprintf('installed version : <comment>%s</comment>', $installed_version));
             $output->writeln('');
         }
+    }
+
+    private function createGuzzleClient()
+    {
+        return new GuzzleClient('', array(
+            GuzzleClient::DISABLE_REDIRECTS => true,
+            GuzzleClient::CURL_OPTIONS => array(
+                CURLOPT_NOPROGRESS => false,
+                CURLOPT_PROGRESSFUNCTION => function ($download_size, $downloaded, $upload_size, $uploaded) {
+                    if (0 < $download_size) {
+                        printf("dowloading... %d%%\r", $downloaded / $download_size  * 100);
+                        flush();
+                    }
+                }
+            )
+        ));
     }
 
     public static function findByLanguageFile()
