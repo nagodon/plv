@@ -31,7 +31,7 @@ class PythonVersions implements VersionsInterface
 
     public function getFilterValue()
     {
-        return array('ol.list-row-container > li > span.release-number > a');
+        return array('div.download-os-source > p.download-buttons > a');
     }
 
     public function getCallback()
@@ -39,7 +39,7 @@ class PythonVersions implements VersionsInterface
         return function ($items) {
             $filtered_replace_items = array();
             foreach ($items as $item) {
-                if (preg_match('/^Python ([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(-?[a-zA-Z0-9]+)?)$/', $item, $m)) {
+                if (preg_match('/^Download Python ([0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(-?[a-zA-Z0-9]+)?)$/', $item, $m)) {
                     $filtered_replace_items[] = $m[1];
                 }
             }

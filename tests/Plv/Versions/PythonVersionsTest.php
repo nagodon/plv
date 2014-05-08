@@ -40,8 +40,8 @@ class PythonVersionsTest extends \PHPUnit_Framework_TestCase
             }));
         }
 
-        $this->assertSame(array('ol.list-row-container > li > span.release-number > a'), $pv->getFilterValue());
-        $this->assertGreaterThanOrEqual(3, count($items));
+        $this->assertSame(array('div.download-os-source > p.download-buttons > a'), $pv->getFilterValue());
+        $this->assertEquals(2, count($items));
 
         return $items;
     }
@@ -56,7 +56,7 @@ class PythonVersionsTest extends \PHPUnit_Framework_TestCase
         $version_str = $callback($items);
 
         $this->assertTrue(is_callable($callback));
-        $this->assertGreaterThanOrEqual(3, count($version_str));
+        $this->assertEquals(2, count($version_str));
         foreach ($version_str as $str) {
             $this->assertRegExp('/^[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}(-?[a-zA-Z0-9]+)?$/', $str);
         }
