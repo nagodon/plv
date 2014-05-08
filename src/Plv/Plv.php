@@ -87,6 +87,7 @@ class Plv
     private function createGuzzleClient()
     {
         return new GuzzleClient('', array(
+            GuzzleClient::SSL_CERT_AUTHORITY => 'system',
             GuzzleClient::DISABLE_REDIRECTS => true,
             GuzzleClient::CURL_OPTIONS => array(
                 CURLOPT_NOPROGRESS => false,
