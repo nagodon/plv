@@ -91,9 +91,9 @@ class Plv
             GuzzleClient::DISABLE_REDIRECTS => true,
             GuzzleClient::CURL_OPTIONS => array(
                 CURLOPT_NOPROGRESS => false,
-                CURLOPT_PROGRESSFUNCTION => function ($download_size, $downloaded, $upload_size, $uploaded) {
+                CURLOPT_PROGRESSFUNCTION => function ($resource, $download_size, $downloaded, $upload_size, $uploaded) {
                     if (0 < $download_size) {
-                        printf("dowloading... %d%%\r", $downloaded / $download_size  * 100);
+                        printf("dowloading... %d%%\r", 100 * ($downloaded / $download_size));
                         flush();
                     }
                 }
